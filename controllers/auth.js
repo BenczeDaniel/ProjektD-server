@@ -75,7 +75,7 @@ export const register=(request,response)=>{
             db.query('INSERT INTO users (username,email,password) values (?,?,?)',[username,email,hashedPassword],(err,result)=>{
                 if(err){
                     console.log('HIBA AZ INSERT-NÉL!',err)
-                    response.send({msg:'Sikertelen regisztráció',id:result.insertId})
+                    response.send({msg:'Sikertelen regisztráció'})
                 }
                 else
                     response.send({msg:'Sikeres regisztráció',id:result.insertId})
