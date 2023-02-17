@@ -33,7 +33,6 @@ export const Category =(request,response)=>{
 }
 
 export const getTrainings =(request,response)=>{
-    console.log('oké')
     db.query('SELECT * from Trainings ',(err,result)=>{
         if(err)
             console.log('HIBA!',err)
