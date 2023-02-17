@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Feb 17. 08:41
+-- Létrehozás ideje: 2023. Feb 17. 12:10
 -- Kiszolgáló verziója: 10.4.21-MariaDB
--- PHP verzió: 8.0.10
+-- PHP verzió: 7.3.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -139,6 +139,33 @@ CREATE TABLE `timetable` (
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `trainings`
+--
+
+CREATE TABLE `trainings` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `subtitle` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `details` varchar(200) COLLATE utf8_hungarian_ci NOT NULL,
+  `img` varchar(50) COLLATE utf8_hungarian_ci NOT NULL,
+  `description` varchar(256) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `trainings`
+--
+
+INSERT INTO `trainings` (`id`, `title`, `subtitle`, `details`, `img`, `description`) VALUES
+(1, 'Biceps', 'Edzésről röviden:\r\n', '    Ez az edzésterv kifejezetten a biceps izomcsoporta vonatkozik\r\n', 'biceps.jpg', 'Bicepsz edzés terve'),
+(2, 'Triceps', 'Edzésről röviden:\r\n', 'Ez az edzésterv kifejezetten a triceps izomcsoporta vonatkozik\r\n', 'triceps.jpg', ''),
+(3, 'Váll', 'Edzésről röviden:', 'Ez az edzésterv kifejezetten a váll izomcsoporta vonatkozik\r\n', 'vall.jpg', ''),
+(4, 'Hát', 'Edzésről röviden:\r\n', 'Ez az edzésterv kifejezetten a hát izomcsoporta vonatkozik\r\n', 'hat.jpg', ''),
+(5, 'Mell', 'Edzésről röviden:    \r\n', 'Ez az edzésterv kifejezetten a mell izomcsoporta vonatkozik', 'mell.jpg', ''),
+(6, 'Láb', 'Edzésről röviden:', 'Ez az edzésterv kifejezetten a láb izomcsoporta vonatkozik', 'lab.jpg', '');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `users`
 --
 
@@ -167,7 +194,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `avatar`, `role`, `avatar_id`, `
 (8, 'Miaucica', 'asddsa@gmail.com', 'user.png', 'user', NULL, '2023-01-27 11:51:01', '$2a$10$JxRANFyBNY3VUz6DIA3i2ut.IrpBoQJI7294cnJbuSNwImcjz5DqG'),
 (9, 'Jelszóasdasd', 'adsjag@gmail.com', 'user.png', 'user', NULL, '2023-01-27 12:27:08', '$2a$10$QmU0aurk90FWGKDkIH8AxutoyyV6LNseDADJlvZGe6D9sKG73m8hW'),
 (11, 'dancsee', 'jozsi@gmail.com', 'user.png', 'user', NULL, '2023-01-27 12:44:43', '$2a$10$hZL6zxG3PZY4X8jPsoGBV.q9hlFTUP02RiRV2U/z/1MdaocRehSgW'),
-(12, 'asd555', 'asd555@gmail.com', 'user.png', 'user', NULL, '2023-02-17 08:26:23', '$2a$10$zocLrlzNBVXvcEXIw9A2ku1uM/9sOzTQk/83U0EaXMcNVDSp2IWUi');
+(12, 'asd555', 'asd555@gmail.com', 'user.png', 'user', NULL, '2023-02-17 08:26:23', '$2a$10$zocLrlzNBVXvcEXIw9A2ku1uM/9sOzTQk/83U0EaXMcNVDSp2IWUi'),
+(13, 'iDaniel21', 'safasf@gmail.com', 'user.png', 'user', NULL, '2023-02-17 09:25:06', '$2a$10$dytkA6mqNE2OasrNAWGc8OYBCebPj.5R88zT.dQxiXfHtW6x3j06C');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -214,6 +242,12 @@ ALTER TABLE `reservation`
 ALTER TABLE `timetable`
   ADD PRIMARY KEY (`id`),
   ADD KEY `userid` (`userid`);
+
+--
+-- A tábla indexei `trainings`
+--
+ALTER TABLE `trainings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- A tábla indexei `users`
@@ -264,10 +298,16 @@ ALTER TABLE `timetable`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT a táblához `trainings`
+--
+ALTER TABLE `trainings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Megkötések a kiírt táblákhoz
