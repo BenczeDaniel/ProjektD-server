@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Feb 01. 12:43
+-- Létrehozás ideje: 2023. Feb 17. 08:41
 -- Kiszolgáló verziója: 10.4.21-MariaDB
--- PHP verzió: 7.3.30
+-- PHP verzió: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,9 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `type` varchar(64) COLLATE utf8mb4_hungarian_ci NOT NULL,
   `description` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `category`
+--
+
+INSERT INTO `category` (`id`, `description`) VALUES
+(1, 'Napijegy'),
+(2, '10 Napos Bérlet'),
+(3, '20 Napos Bérlet'),
+(4, '1 Havi Bérlet'),
+(5, '3 Havi Bérlet'),
+(6, '12 Havi Bérlet');
 
 -- --------------------------------------------------------
 
@@ -81,9 +92,22 @@ CREATE TABLE `personaltrainers` (
 CREATE TABLE `prices` (
   `id` int(11) NOT NULL,
   `categid` int(11) NOT NULL,
-  `price` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `type` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL
+  `KedvezmenyesAr` int(6) NOT NULL,
+  `Egeszar` int(6) NOT NULL,
+  `megjegyzes` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL DEFAULT 'A kedvezményes összeg a diákokat érinti.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `prices`
+--
+
+INSERT INTO `prices` (`id`, `categid`, `KedvezmenyesAr`, `Egeszar`, `megjegyzes`) VALUES
+(1, 1, 3000, 3500, 'A kedvezményes összeg a diákokat érinti.'),
+(2, 2, 9000, 9500, 'A kedvezményes összeg a diákokat érinti.'),
+(3, 3, 15000, 15500, 'A kedvezményes összeg a diákokat érinti.'),
+(4, 4, 19000, 19500, 'A kedvezményes összeg a diákokat érinti.'),
+(5, 5, 54000, 54500, 'A kedvezményes összeg a diákokat érinti.'),
+(6, 6, 215000, 217000, 'A kedvezményes összeg a diákokat érinti.');
 
 -- --------------------------------------------------------
 
@@ -142,7 +166,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `avatar`, `role`, `avatar_id`, `
 (7, 'Danika01', 'Danika@gmail.com', 'user.png', 'user', NULL, '2023-01-25 12:15:14', '$2a$10$LSqHPXiSr5T.u3TKl9vnzOOgsF1/6M9NEwUjpbCj2MJ4LltvOmgeK'),
 (8, 'Miaucica', 'asddsa@gmail.com', 'user.png', 'user', NULL, '2023-01-27 11:51:01', '$2a$10$JxRANFyBNY3VUz6DIA3i2ut.IrpBoQJI7294cnJbuSNwImcjz5DqG'),
 (9, 'Jelszóasdasd', 'adsjag@gmail.com', 'user.png', 'user', NULL, '2023-01-27 12:27:08', '$2a$10$QmU0aurk90FWGKDkIH8AxutoyyV6LNseDADJlvZGe6D9sKG73m8hW'),
-(11, 'dancsee', 'jozsi@gmail.com', 'user.png', 'user', NULL, '2023-01-27 12:44:43', '$2a$10$hZL6zxG3PZY4X8jPsoGBV.q9hlFTUP02RiRV2U/z/1MdaocRehSgW');
+(11, 'dancsee', 'jozsi@gmail.com', 'user.png', 'user', NULL, '2023-01-27 12:44:43', '$2a$10$hZL6zxG3PZY4X8jPsoGBV.q9hlFTUP02RiRV2U/z/1MdaocRehSgW'),
+(12, 'asd555', 'asd555@gmail.com', 'user.png', 'user', NULL, '2023-02-17 08:26:23', '$2a$10$zocLrlzNBVXvcEXIw9A2ku1uM/9sOzTQk/83U0EaXMcNVDSp2IWUi');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -206,7 +231,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `opening`
@@ -224,7 +249,7 @@ ALTER TABLE `personaltrainers`
 -- AUTO_INCREMENT a táblához `prices`
 --
 ALTER TABLE `prices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `reservation`
@@ -242,7 +267,7 @@ ALTER TABLE `timetable`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Megkötések a kiírt táblákhoz
