@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Feb 17. 12:10
--- Kiszolgáló verziója: 10.4.21-MariaDB
--- PHP verzió: 7.3.30
+-- Létrehozás ideje: 2023. Már 07. 11:53
+-- Kiszolgáló verziója: 10.4.27-MariaDB
+-- PHP verzió: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `description` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL
+  `description` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
@@ -52,7 +52,7 @@ INSERT INTO `category` (`id`, `description`) VALUES
 
 CREATE TABLE `opening` (
   `id` int(11) NOT NULL,
-  `day` varchar(30) COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `day` varchar(30) NOT NULL,
   `start` int(2) NOT NULL DEFAULT 10,
   `end` int(2) NOT NULL DEFAULT 22
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
@@ -79,7 +79,7 @@ INSERT INTO `opening` (`id`, `day`, `start`, `end`) VALUES
 CREATE TABLE `personaltrainers` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `aboutme` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `aboutme` varchar(256) NOT NULL,
   `categid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
@@ -94,7 +94,7 @@ CREATE TABLE `prices` (
   `categid` int(11) NOT NULL,
   `KedvezmenyesAr` int(6) NOT NULL,
   `Egeszar` int(6) NOT NULL,
-  `megjegyzes` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL DEFAULT 'A kedvezményes összeg a diákokat érinti.'
+  `megjegyzes` varchar(256) NOT NULL DEFAULT 'A kedvezményes összeg a diákokat érinti.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `reservation` (
 CREATE TABLE `timetable` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `weekday` varchar(20) COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `weekday` varchar(20) NOT NULL,
   `hour` int(2) NOT NULL,
   `min` int(2) NOT NULL,
   `maxuser` int(2) NOT NULL
@@ -144,11 +144,11 @@ CREATE TABLE `timetable` (
 
 CREATE TABLE `trainings` (
   `id` int(11) NOT NULL,
-  `title` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-  `subtitle` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-  `details` varchar(200) COLLATE utf8_hungarian_ci NOT NULL,
-  `img` varchar(50) COLLATE utf8_hungarian_ci NOT NULL,
-  `description` varchar(256) COLLATE utf8_hungarian_ci NOT NULL
+  `title` varchar(100) NOT NULL,
+  `subtitle` varchar(100) NOT NULL,
+  `details` varchar(200) NOT NULL,
+  `img` varchar(50) NOT NULL,
+  `description` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
@@ -156,12 +156,12 @@ CREATE TABLE `trainings` (
 --
 
 INSERT INTO `trainings` (`id`, `title`, `subtitle`, `details`, `img`, `description`) VALUES
-(1, 'Biceps', 'Edzésről röviden:\r\n', '    Ez az edzésterv kifejezetten a biceps izomcsoporta vonatkozik\r\n', 'biceps.jpg', 'Bicepsz edzés terve'),
-(2, 'Triceps', 'Edzésről röviden:\r\n', 'Ez az edzésterv kifejezetten a triceps izomcsoporta vonatkozik\r\n', 'triceps.jpg', ''),
-(3, 'Váll', 'Edzésről röviden:', 'Ez az edzésterv kifejezetten a váll izomcsoporta vonatkozik\r\n', 'vall.jpg', ''),
-(4, 'Hát', 'Edzésről röviden:\r\n', 'Ez az edzésterv kifejezetten a hát izomcsoporta vonatkozik\r\n', 'hat.jpg', ''),
-(5, 'Mell', 'Edzésről röviden:    \r\n', 'Ez az edzésterv kifejezetten a mell izomcsoporta vonatkozik', 'mell.jpg', ''),
-(6, 'Láb', 'Edzésről röviden:', 'Ez az edzésterv kifejezetten a láb izomcsoporta vonatkozik', 'lab.jpg', '');
+(1, 'Biceps', 'Edzésről röviden:\r\n', '    Ez az edzésterv kifejezetten a biceps izomcsoporta vonatkozik\r\n', 'biceps.jpg', 'https://www.youtube.com/embed/hcW18DTD5wU'),
+(2, 'Triceps', 'Edzésről röviden:\r\n', 'Ez az edzésterv kifejezetten a triceps izomcsoporta vonatkozik\r\n', 'triceps.jpg', 'https://www.youtube.com/embed/LynzhKXQz1Q'),
+(3, 'Váll', 'Edzésről röviden:', 'Ez az edzésterv kifejezetten a váll izomcsoporta vonatkozik\r\n', 'vall.jpg', 'https://www.youtube.com/embed/jQUVKIjIGlY'),
+(4, 'Hát', 'Edzésről röviden:\r\n', 'Ez az edzésterv kifejezetten a hát izomcsoporta vonatkozik\r\n', 'hat.jpg', 'https://www.youtube.com/embed/MQUpgbY5m9c'),
+(5, 'Mell', 'Edzésről röviden:    \r\n', 'Ez az edzésterv kifejezetten a mell izomcsoporta vonatkozik', 'mell.jpg', 'https://www.youtube.com/embed/0ZRyqtBjuOo'),
+(6, 'Láb', 'Edzésről röviden:', 'Ez az edzésterv kifejezetten a láb izomcsoporta vonatkozik', 'lab.jpg', 'https://www.youtube.com/embed/EDiG47nZ-ZI');
 
 -- --------------------------------------------------------
 
@@ -171,13 +171,13 @@ INSERT INTO `trainings` (`id`, `title`, `subtitle`, `details`, `img`, `descripti
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(30) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `email` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `avatar` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL DEFAULT 'user.png',
-  `role` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL DEFAULT 'user',
-  `avatar_id` varchar(256) COLLATE utf8mb4_hungarian_ci DEFAULT NULL,
+  `username` varchar(30) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `avatar` varchar(256) NOT NULL DEFAULT 'user.png',
+  `role` varchar(256) NOT NULL DEFAULT 'user',
+  `avatar_id` varchar(256) DEFAULT NULL,
   `registerdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `password` varchar(256) COLLATE utf8mb4_hungarian_ci NOT NULL
+  `password` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
@@ -195,7 +195,11 @@ INSERT INTO `users` (`id`, `username`, `email`, `avatar`, `role`, `avatar_id`, `
 (9, 'Jelszóasdasd', 'adsjag@gmail.com', 'user.png', 'user', NULL, '2023-01-27 12:27:08', '$2a$10$QmU0aurk90FWGKDkIH8AxutoyyV6LNseDADJlvZGe6D9sKG73m8hW'),
 (11, 'dancsee', 'jozsi@gmail.com', 'user.png', 'user', NULL, '2023-01-27 12:44:43', '$2a$10$hZL6zxG3PZY4X8jPsoGBV.q9hlFTUP02RiRV2U/z/1MdaocRehSgW'),
 (12, 'asd555', 'asd555@gmail.com', 'user.png', 'user', NULL, '2023-02-17 08:26:23', '$2a$10$zocLrlzNBVXvcEXIw9A2ku1uM/9sOzTQk/83U0EaXMcNVDSp2IWUi'),
-(13, 'iDaniel21', 'safasf@gmail.com', 'user.png', 'user', NULL, '2023-02-17 09:25:06', '$2a$10$dytkA6mqNE2OasrNAWGc8OYBCebPj.5R88zT.dQxiXfHtW6x3j06C');
+(13, 'iDaniel21', 'safasf@gmail.com', 'user.png', 'user', NULL, '2023-02-17 09:25:06', '$2a$10$dytkA6mqNE2OasrNAWGc8OYBCebPj.5R88zT.dQxiXfHtW6x3j06C'),
+(14, 'asd5555', 'asd5555@gmail.com', 'user.png', 'user', NULL, '2023-02-27 16:40:32', '$2a$10$Eb3/SscW1l4BZMlK/4clw.fesjrnXjs7BubOkRmf5sOQKKEmQoOJ.'),
+(15, 'danika123', 'danika123@gmail.com', 'user.png', 'user', NULL, '2023-02-27 16:42:52', '$2a$10$.k8Al6/kavc4ufnQqBjr7ezaW9r9WAN84YWqr7FxlG4YMeSiltF6y'),
+(16, 'dorina123', 'dorina123@gmail.com', 'user.png', 'user', NULL, '2023-02-27 16:54:15', '$2a$10$VlB7ZLueTFpJa9upEyQdOuvA0/hIbP530aXABfLqkqijKha2v3ooq'),
+(17, 'nelli123', 'nelli123@gmail.com', 'user.png', 'user', NULL, '2023-03-04 18:25:33', '$2a$10$fDfJIiDIqVH/7UN7kd36memrGtQNYctdgATLACqsnBfTRxyWONtBW');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -307,7 +311,7 @@ ALTER TABLE `trainings`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Megkötések a kiírt táblákhoz
