@@ -40,3 +40,36 @@ export const getTrainings =(request,response)=>{
         response.send(result)
     })
 }
+
+
+export const Users =(request,response)=>{
+    console.log(request.body)
+    db.query('SELECT  *  from users order by id',(err,result)=>{
+        if(err)
+            console.log('HIBA!',err)
+        else
+        response.send(result)
+    })
+}
+
+
+export const updatePrices =(request,response)=>{
+    console.log(request.body)
+    db.query('SELECT  *  from prices order by id',(err,result)=>{
+        if(err)
+            console.log('HIBA!',err)
+        else
+        response.send(result)
+    })
+}
+
+
+export const updateOpening=(request,response)=>{
+    console.log(request.body)
+    db.query('SELECT  *  from opening order by id',(err,result)=>{
+        if(err)
+            console.log('HIBA!',err)
+        else
+        response.send(result)
+    })
+}

@@ -111,16 +111,14 @@ const removeTMPfiles = path =>{
     })
 }
 
-export const deleteUser=(request,response)=>{
-    console.log(request.body)
-    const {username,avatar_id} = request.body
-    db.query('DELETE FROM `users` where username=?',[username],(err,result)=>{
+export const delUser=(request,response)=>{
+    const {id} = request.params
+    db.query('DELETE FROM `users` where  id=?',[id],(err,result)=>{
         if(err)
             console.log('HIBA!',err)
         else{
             console.log("Törlés eredménye: ",result)
-            avatar_id && removeFromCloud(avatar_id)
-            response.send({msg:"Sikeresen törölte a felhasználóját!",username:username})
+            response.send({result})
         }
             
     })
@@ -143,5 +141,17 @@ export const changePassword=(request,response)=>{
                     response.send({msg:'Sikeres jelszó módosítás'})
             })
         }
+    })
+}
+
+
+export const updateUser=(request,response)=>{
+    console.log(request.body)
+    const {id,role} = request.body
+    db.query('UPDATE users set role =? where id = ?',[role,id],(err,result)=>{
+        if(err)
+            console.log('HIBA!',err)
+        else
+            response.send(result)
     })
 }
