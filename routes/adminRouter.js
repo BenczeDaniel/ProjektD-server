@@ -10,3 +10,4 @@ adminRouter.route('/updatePrices').get(updatePrices);
 adminRouter.route('/updateOpening').get(updateOpening);
 
 
+

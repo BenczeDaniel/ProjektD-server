@@ -155,3 +155,16 @@ export const updateUser=(request,response)=>{
             response.send(result)
     })
 }
+
+
+
+export const updatePrices=(request,response)=>{
+    console.log(request.body)
+    const {id,kedvezmenyesar} = request.body
+    db.query('UPDATE prices set KedvezmenyesAr =? where id = ?',[kedvezmenyesar,id],(err,result)=>{
+        if(err)
+            console.log('HIBA!',err)
+        else
+            response.send(result)   
+    })
+}

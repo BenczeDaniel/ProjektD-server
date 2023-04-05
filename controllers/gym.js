@@ -24,7 +24,7 @@ export const Prices =(request,response)=>{
 
 export const Category =(request,response)=>{
     console.log(request.body)
-    db.query('SELECT c.id, p.Egeszar,p.kedvezmenyesar,p.megjegyzes,c.description from prices p, category c WHERE p.categid = c.id',(err,result)=>{
+    db.query('SELECT p.id priceid, c.id, p.Egeszar,p.kedvezmenyesar,p.megjegyzes,c.description from prices p, category c WHERE p.categid = c.id',(err,result)=>{
         if(err)
             console.log('HIBA!',err)
         else
@@ -53,9 +53,9 @@ export const Users =(request,response)=>{
 }
 
 
-export const updatePrices =(request,response)=>{
+export const updateOpening=(request,response)=>{
     console.log(request.body)
-    db.query('SELECT  *  from prices order by id',(err,result)=>{
+    db.query('SELECT  *  from opening order by id',(err,result)=>{
         if(err)
             console.log('HIBA!',err)
         else
@@ -64,12 +64,24 @@ export const updatePrices =(request,response)=>{
 }
 
 
-export const updateOpening=(request,response)=>{
-    console.log(request.body)
-    db.query('SELECT  *  from opening order by id',(err,result)=>{
+export const deletePrices =(request,response)=>{
+    const{id}=request.params
+    db.query('DELETE from prices where id=? ',[+id],(err,result)=>{
         if(err)
             console.log('HIBA!',err)
         else
         response.send(result)
+    })
+}
+
+
+export const updatePrices=(request,response)=>{
+    console.log(request.body)
+    const {id,kedvezmenyesar} = request.body
+    db.query('UPDATE prices set KedvezmenyesAr =? where id = ?',[kedvezmenyesar,id],(err,result)=>{
+        if(err)
+            console.log('HIBA!',err)
+        else
+            response.send(result)   
     })
 }
