@@ -63,13 +63,3 @@ export const updatePrices =(request,response)=>{
         response.send(result)
     })
 }
-
-export const updateOpening=(request,response)=>{
-    console.log(request.body)
-    db.query('SELECT  *  from opening order by id',(err,result)=>{
-        if(err)
-            console.log('HIBA!',err)
-        else
-        response.send(result)
-    })
-}

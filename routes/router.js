@@ -1,5 +1,5 @@
 import express from "express";
-import {login,register,checkEmail,checkUsername,updateAvatar,delUser,changePassword,updateUser} from "../controllers/auth.js"
+import {login,register,checkEmail,checkUsername,updateAvatar,delUser,changePassword,updateUser,updatePrices} from "../controllers/auth.js"
 
 export const router=express.Router();
 
@@ -11,3 +11,4 @@ router.route('/updateAvatar').put(updateAvatar);
 router.route('/deleteUser/:id').get(delUser);
 router.route('/changePassword').put(changePassword);
 router.route('/update').post(updateUser);
+router.route('/updateprices').post(updatePrices);

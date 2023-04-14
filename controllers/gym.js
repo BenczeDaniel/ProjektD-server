@@ -53,16 +53,6 @@ export const Users =(request,response)=>{
 }
 
 
-export const updateOpening=(request,response)=>{
-    console.log(request.body)
-    db.query('SELECT  *  from opening order by id',(err,result)=>{
-        if(err)
-            console.log('HIBA!',err)
-        else
-        response.send(result)
-    })
-}
-
 
 export const deletePrices =(request,response)=>{
     const{id}=request.params
@@ -77,8 +67,8 @@ export const deletePrices =(request,response)=>{
 
 export const updatePrices=(request,response)=>{
     console.log(request.body)
-    const {id,kedvezmenyesar} = request.body
-    db.query('UPDATE prices set KedvezmenyesAr =? where id = ?',[kedvezmenyesar,id],(err,result)=>{
+    const {id,Egeszar,kedvezmenyesar} = request.body
+    db.query('UPDATE prices set KedvezmenyesAr =? , Egeszar =? where id = ?',[Egeszar,kedvezmenyesar,id],(err,result)=>{
         if(err)
             console.log('HIBA!',err)
         else
