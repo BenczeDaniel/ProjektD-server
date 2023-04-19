@@ -168,3 +168,6 @@ export const updatePrices=(request,response)=>{
             response.send(result)   
     })
 }
+
+
+
