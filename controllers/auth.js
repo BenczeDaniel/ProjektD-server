@@ -5,6 +5,8 @@ import { upload,removeFromCloud } from "../cloudinary.js";
 import fs from 'fs'
 import path from "path";
 const db=mysql.createConnection(configDB)
+
+
 //ideiglenes login:
 
 /*export const login=(request,response)=>{
@@ -22,6 +24,7 @@ export const login=(request,response)=>{
     console.log(request.body)
     const {username,password} = request.body
     db.query('SELECT id,password,email,avatar,avatar_id,role FROM `users` where username=?',[username],(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else{
@@ -45,6 +48,7 @@ export const checkEmail=(request,response)=>{
     console.log(request.body)
     const {email} = request.body
     db.query('SELECT count(*) nr FROM `users` where email=?',[email],(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else
@@ -57,6 +61,7 @@ export const checkUsername=(request,response)=>{
     console.log(request.body)
     const {username} = request.body
     db.query('SELECT count(*) nr FROM `users` where username=?',[username],(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else
@@ -68,11 +73,13 @@ const saltRound=10
 export const register=(request,response)=>{
     const {username,email,password} = request.body
     bcrypt.hash(password,saltRound,(err,hashedPassword)=>{
+       
         if(err){
             console.log('BCRYPT HIBA!',err)
         }
         else{
             db.query('INSERT INTO users (username,email,password) values (?,?,?)',[username,email,hashedPassword],(err,result)=>{
+                
                 if(err){
                     console.log('HIBA AZ INSERT-NÉL!',err)
                     response.send({msg:'Sikertelen regisztráció'})
@@ -91,6 +98,7 @@ export const updateAvatar=async (request,response)=>{
         console.log("Selected: ",selFile)
         const cloudFile = await upload(selFile.tempFilePath)
         db.query('update users set avatar=?,avatar_id=? where username=?',[cloudFile.url,cloudFile.public_id,username],(err,result)=>{
+            
             if(err){
                 console.log('HIBA!',err)
                 response.send({msg:"Hiba: ",err})
@@ -114,6 +122,7 @@ const removeTMPfiles = path =>{
 export const delUser=(request,response)=>{
     const {id} = request.params
     db.query('DELETE FROM `users` where  id=?',[id],(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else{
@@ -133,6 +142,7 @@ export const changePassword=(request,response)=>{
         }
         else{
             db.query('update users set password=? where username=?',[hashedPassword,username],(err,result)=>{
+                
                 if(err){
                     console.log('HIBA AZ INSERT-NÉL!',err)
                     response.send({msg:'Jelszó módosítás sikertelen!'})
@@ -149,6 +159,7 @@ export const updateUser=(request,response)=>{
     console.log(request.body)
     const {id,role} = request.body
     db.query('UPDATE users set role =? where id = ?',[role,id],(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else
@@ -162,6 +173,7 @@ export const updatePrices=(request,response)=>{
     console.log(request.body)
     const {id,kedvezmenyesar,Egeszar} = request.body
     db.query('UPDATE prices set KedvezmenyesAr =? , Egeszar =? where id = ?',[Egeszar,kedvezmenyesar,id],(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else

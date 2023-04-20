@@ -13,6 +13,9 @@ const db=mysql.createConnection(configDB)
 export const Category =(request,response)=>{
     console.log(request.body)
     db.query('SELECT c.id, p.Egeszar,p.kedvezmenyesar,p.megjegyzes,c.description from prices p, category c WHERE p.categid = c.id',(err,result)=>{
+
+        
+
         if(err)
             console.log('HIBA!',err)
         else
@@ -24,6 +27,7 @@ export const Category =(request,response)=>{
 export const Prices =(request,response)=>{
     console.log(request.body)
     db.query('SELECT  *  from prices order by id',(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else
@@ -35,6 +39,7 @@ export const Prices =(request,response)=>{
 export const Opening=(request,response)=>{
     console.log(request.body)
     db.query('SELECT  *  from opening order by id',(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else
@@ -47,6 +52,7 @@ export const Opening=(request,response)=>{
 export const Users =(request,response)=>{
     console.log(request.body)
     db.query('SELECT  *  from users order by id',(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else
@@ -57,6 +63,7 @@ export const Users =(request,response)=>{
 export const updatePrices =(request,response)=>{
     console.log(request.body)
     db.query('SELECT  *  from prices order by id',(err,result)=>{
+        
         if(err)
             console.log('HIBA!',err)
         else
